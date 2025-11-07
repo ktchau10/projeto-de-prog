@@ -1,0 +1,275 @@
+/* Movie Details Page Styles */
+.movie-details {
+    padding-top: 70px; /* Account for fixed header */
+    min-height: 100vh;
+    background-color: var(--background-dark);
+}
+
+/* Loading and Error States */
+.loading, .error {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 60vh;
+    text-align: center;
+    padding: 2rem;
+}
+
+.loading i, .error i {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    color: var(--primary-color);
+}
+
+.error button {
+    margin-top: 1.5rem;
+    padding: 0.8rem 1.5rem;
+    background: var(--primary-color);
+    border: none;
+    border-radius: 25px;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.error button:hover {
+    background-color: #ff0f1f;
+}
+
+/* Movie Content Styles */
+.movie-backdrop {
+    position: relative;
+    height: 400px;
+    overflow: hidden;
+}
+
+.backdrop-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, var(--background-dark) 100%);
+    z-index: 1;
+}
+
+#backdrop-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    filter: blur(2px);
+}
+
+.movie-content {
+    position: relative;
+    z-index: 2;
+    max-width: 1200px;
+    margin: -150px auto 0;
+    padding: 0 1rem;
+}
+
+.movie-basic-info {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.movie-poster {
+    flex-shrink: 0;
+    width: 300px;
+    height: 450px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+}
+
+.movie-poster img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.movie-header {
+    flex-grow: 1;
+    padding-top: 2rem;
+}
+
+.movie-header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.movie-meta {
+    display: flex;
+    gap: 1.5rem;
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+}
+
+.movie-meta span {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+#genres {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.genre-tag {
+    padding: 0.3rem 1rem;
+    background: rgba(255,255,255,0.1);
+    border-radius: 15px;
+    font-size: 0.9rem;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.primary-button, .secondary-button {
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 25px;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.primary-button {
+    background: var(--primary-color);
+    color: white;
+}
+
+.secondary-button {
+    background: rgba(255,255,255,0.1);
+    color: var(--text-color);
+}
+
+.primary-button:hover {
+    background: #ff0f1f;
+    transform: translateY(-2px);
+}
+
+.secondary-button:hover {
+    background: rgba(255,255,255,0.2);
+    transform: translateY(-2px);
+}
+
+/* Movie Overview */
+.movie-overview {
+    margin-bottom: 3rem;
+}
+
+.movie-overview h2 {
+    margin-bottom: 1rem;
+}
+
+/* Trailer Section */
+.trailer-section {
+    margin-bottom: 3rem;
+}
+
+.trailer-wrapper {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+    height: 0;
+    overflow: hidden;
+    border-radius: 10px;
+    background: #000;
+}
+
+.trailer-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+/* Cast Section */
+.cast-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.cast-card {
+    background: rgba(255,255,255,0.05);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+
+.cast-card:hover {
+    transform: translateY(-5px);
+}
+
+.cast-image {
+    width: 100%;
+    height: 225px;
+    object-fit: cover;
+}
+
+.cast-info {
+    padding: 1rem;
+}
+
+.cast-info h3 {
+    font-size: 1rem;
+    margin-bottom: 0.3rem;
+}
+
+.cast-info p {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .movie-basic-info {
+        flex-direction: column;
+    }
+
+    .movie-poster {
+        width: 200px;
+        height: 300px;
+        margin: 0 auto;
+    }
+
+    .movie-header {
+        text-align: center;
+        padding-top: 1rem;
+    }
+
+    .movie-meta {
+        justify-content: center;
+    }
+
+    #genres {
+        justify-content: center;
+    }
+
+    .action-buttons {
+        justify-content: center;
+    }
+
+    .cast-list {
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    }
+}
