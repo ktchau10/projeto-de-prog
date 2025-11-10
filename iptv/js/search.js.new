@@ -1,0 +1,177 @@
+// Configurações da aplicação
+const APP = {
+    api: {
+        key: '2c19bf5eb981d886122e44a78fed935d',
+        baseUrl: 'https://api.themoviedb.org/3',
+        imageUrl: 'https://image.tmdb.org/t/p',
+        language: 'pt-BR'
+    },
+    genres: {
+        'acao': '28',
+        'comedia': '35',
+        'drama': '18',
+        'terror': '27',
+        'aventura': '12'
+    },
+    elements: {
+        carousel: () => document.getElementById('search-movies-carousel')
+    }
+};
+
+class MovieSearch {
+    constructor() {
+        this.carousel = APP.elements.carousel();
+        this.init();
+    }
+
+    init() {
+        if (!this.carousel) {
+            console.error('Elemento carousel não encontrado');
+            return;
+        }
+
+        const query = this.getQueryParam('q');
+        const genre = this.getQueryParam('genre');
+
+        if (genre && APP.genres[genre]) {
+            this.searchByGenre(genre);
+        } else if (query) {
+            this.searchByQuery(query);
+        } else {
+            this.showMessage('error', 'Nenhum termo de busca informado');
+        }
+    }
+
+    getQueryParam(param) {
+        return new URLSearchParams(window.location.search).get(param);
+    }
+
+    showMessage(type, message) {
+        if (this.carousel) {
+            this.carousel.innerHTML = `<div class="${type}">${message}</div>`;
+        }
+    }
+
+    async searchByGenre(genre) {
+        this.showMessage('loading', 'Buscando filmes...');
+        
+        try {
+            const url = this.buildUrl('discover/movie', {
+                with_genres: APP.genres[genre],
+                sort_by: 'popularity.desc'
+            });
+
+            const movies = await this.fetchMovies(url);
+            this.displayMovies(movies);
+        } catch (error) {
+            console.error('Erro na busca por gênero:', error);
+            this.showMessage('error', 'Erro ao buscar filmes');
+        }
+    }
+
+    async searchByQuery(query) {
+        this.showMessage('loading', 'Buscando filmes...');
+        
+        try {
+            const url = this.buildUrl('search/movie', {
+                query: query,
+                sort_by: 'popularity.desc'
+            });
+
+            const movies = await this.fetchMovies(url);
+            this.displayMovies(movies);
+        } catch (error) {
+            console.error('Erro na busca por texto:', error);
+            this.showMessage('error', 'Erro ao buscar filmes');
+        }
+    }
+
+    buildUrl(endpoint, params = {}) {
+        const defaultParams = {
+            api_key: APP.api.key,
+            language: APP.api.language,
+            include_adult: false,
+            page: 1
+        };
+
+        const searchParams = new URLSearchParams({
+            ...defaultParams,
+            ...params
+        });
+
+        return `${APP.api.baseUrl}/${endpoint}?${searchParams.toString()}`;
+    }
+
+    async fetchMovies(url) {
+        const response = await fetch(url);
+        if (!response.ok) {
+            throw new Error(`Erro HTTP: ${response.status}`);
+        }
+        const data = await response.json();
+        return data.results || [];
+    }
+
+    displayMovies(movies) {
+        if (!movies.length) {
+            this.showMessage('error', 'Nenhum filme encontrado');
+            return;
+        }
+
+        this.carousel.innerHTML = '';
+
+        movies
+            .filter(movie => this.isValidMovie(movie))
+            .forEach(movie => {
+                this.carousel.appendChild(this.createMovieCard(movie));
+            });
+
+        this.attachDetailsListeners();
+    }
+
+    isValidMovie(movie) {
+        return movie.poster_path && 
+               movie.title && 
+               movie.release_date;
+    }
+
+    createMovieCard(movie) {
+        const card = document.createElement('div');
+        card.className = 'movie-card';
+        card.dataset.movieId = movie.id;
+
+        const posterUrl = movie.poster_path
+            ? `${APP.api.imageUrl}/w300${movie.poster_path}`
+            : 'https://images.unsplash.com/photo-1542204165-65bf26472b9b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&h=450';
+
+        card.innerHTML = `
+            <img src="${posterUrl}" alt="${movie.title}" loading="lazy">
+            <h3>${movie.title}</h3>
+            <div class="movie-info">
+                <span class="rating">
+                    <i class="fas fa-star"></i>
+                    ${movie.vote_average?.toFixed(1) || 'N/A'}
+                </span>
+                <span class="year">${movie.release_date?.split('-')[0] || 'N/A'}</span>
+            </div>
+            <button class="details-button" data-movie-id="${movie.id}">Ver detalhes</button>
+        `;
+
+        return card;
+    }
+
+    attachDetailsListeners() {
+        this.carousel.querySelectorAll('.details-button').forEach(button => {
+            button.addEventListener('click', () => {
+                const movieId = button.dataset.movieId;
+                if (movieId) {
+                    window.location.href = `movie-details.html?id=${movieId}`;
+                }
+            });
+        });
+    }
+}
+
+// Inicialização
+document.addEventListener('DOMContentLoaded', () => {
+    new MovieSearch();
+});
