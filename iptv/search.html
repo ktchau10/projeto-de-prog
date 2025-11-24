@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultados da Pesquisa - CineStream</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header class="header">
+        <nav class="navbar navbar-search">
+            <div class="logo">
+                <a href="index.html"><h1>CineStream</h1></a>
+            </div>
+            <div class="back-btn-container">
+                <a href="index.html" class="logout-button back-to-home-btn"><i class="fas fa-arrow-left"></i> Voltar para o início</a>
+            </div>
+        </nav>
+    </header>
+    <main style="margin-top: 120px;">
+        <section class="featured" id="search-results">
+            <h2>Resultados da Pesquisa</h2>
+            <div class="movies-carousel" id="search-movies-carousel">
+                <!-- Movie cards serão adicionados via JS -->
+            </div>
+        </section>
+    </main>
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <h2>CineStream</h2>
+            </div>
+            <div class="footer-links">
+                <h3>Links Rápidos</h3>
+                <ul>
+                    <li><a href="#home">Início</a></li>
+                    <li><a href="#categories">Categorias</a></li>
+                    <li><a href="favoritos.html">Favoritos</a></li>
+                    <li><a href="#about">Sobre</a></li>
+                </ul>
+            </div>
+            <div class="footer-social">
+                <h3>Redes Sociais</h3>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+            <div class="footer-contact">
+                <h3>Contato</h3>
+                <p>Email: contato@cinestream.com</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>©️ 2025 CineStream — Projeto acadêmico. Dados fornecidos pela TMDB API.</p>
+        </div>
+    </footer>
+    <!-- Verificação inicial -->
+    <script>
+        console.log('HTML carregado, preparando para carregar search.js');
+        window.addEventListener('error', function(e) {
+            console.error('Erro ao carregar script:', e);
+        });
+    </script>
+    <script src="js/search.js"></script>
+    <script>
+        console.log('Script tag de search.js incluída');
+    </script>
+</body>
+</html>

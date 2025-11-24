@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel de Administração - CineStream</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .admin-main { padding-top: 100px; max-width: 1200px; margin: 0 auto; min-height: 80vh; }
+        .admin-section { margin-bottom: 3rem; padding: 2rem; background: #141414; border-radius: 8px; }
+        .search-admin { display: flex; gap: 1rem; margin-bottom: 2rem; }
+        .search-admin input { flex-grow: 1; padding: 0.8rem; border-radius: 4px; border: 1px solid #333; background: #222; color: white; }
+        .search-admin button { padding: 0.8rem 1.5rem; background: #007bff; border: none; border-radius: 4px; color: white; cursor: pointer; }
+        #tmdb-results { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 1.5rem; }
+        .result-card { background: #222; border-radius: 8px; overflow: hidden; position: relative; }
+        .result-card img { width: 100%; height: 270px; object-fit: cover; }
+        .result-info { padding: 1rem; }
+        .result-info h3 { font-size: 1rem; margin-bottom: 0.5rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .result-card button { width: 100%; padding: 0.6rem; border: none; color: white; cursor: pointer; transition: background 0.3s ease; }
+        .btn-add { background: var(--primary-color); }
+        .btn-remove { background: #660000; }
+        .btn-add.added { background: #28a745; }
+        .status-message { margin-top: 1rem; padding: 1rem; border-radius: 4px; background: #333; color: white; display: none; }
+        .movies-carousel { flex-wrap: wrap; justify-content: start;} /* Modifica o estilo do carousel para quebrar linhas */
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="navbar navbar-search">
+            <div class="logo">
+                <a href="admin.html"><h1>CineStream - Admin</h1></a> 
+            </div>
+            <div class="back-btn-container">
+                <a href="auth/logout.php" class="logout-button"><i class="fas fa-sign-out-alt"></i> Sair</a>
+            </div>
+        </nav>
+    </header>
+    <main class="admin-main">
+        <h2>Gerenciamento de Conteúdo</h2>
+
+        <section class="admin-section">
+            <h3>1. Buscar e Adicionar Conteúdo (TMDB)</h3>
+            <div class="search-admin">
+                <input type="text" id="admin-search-input" placeholder="Buscar filme ou série por nome...">
+                <button id="admin-search-btn"><i class="fas fa-search"></i> Buscar</button>
+            </div>
+            
+            <div id="loading-state" class="loading" style="display: none;">Buscando...</div>
+            <div id="admin-status" class="status-message"></div>
+
+            <div id="tmdb-results">
+                </div>
+        </section>
+
+        <section class="admin-section">
+            <h3>2. Conteúdo Ativo (Para Remoção Rápida)</h3>
+            <div id="active-content-list" class="movies-carousel">
+                </div>
+        </section>
+    </main>
+    <footer>
+        </footer>
+    <script src="js/admin.js"></script>
+    </body>
+</html>

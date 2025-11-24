@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalhes do Filme - CineStream</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/movie-details.css">
+</head>
+<body>
+    <!-- Header/Navbar -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="logo">
+                <a href="index.html"><h1>CineStream</h1></a>
+            </div>
+            <div class="search-bar">
+                <input type="text" placeholder="Buscar filmes...">
+                <button type="button"><i class="fas fa-search"></i></button>
+            </div>
+            <button class="menu-toggle" aria-label="Menu">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="menu">
+                <ul>
+                    <li><a href="index.html">Início</a></li>
+                    <li><a href="favoritos.html">Favoritos</a></li>
+                    <li><a href="index.html#categories">Categorias</a></li>
+                    <li><a href="index.html#about">Sobre</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Movie Details Section -->
+    <main class="movie-details">
+        <!-- Loading State -->
+        <div id="loading-state" class="loading">
+            <i class="fas fa-spinner fa-spin"></i>
+            <p>Carregando informações do filme...</p>
+        </div>
+
+        <!-- Error State -->
+        <div id="error-state" class="error" style="display: none;">
+            <i class="fas fa-exclamation-circle"></i>
+            <p>Ops! Algo deu errado ao carregar as informações.</p>
+            <button onclick="window.location.href='index.html'">Voltar para a página inicial</button>
+        </div>
+
+        <!-- Content Section -->
+        <section id="movie-info" style="display: none;">
+            <!-- Backdrop/Header Section -->
+            <div class="movie-backdrop">
+                <div class="backdrop-overlay"></div>
+                <div id="backdrop-image"></div>
+            </div>
+
+            <div class="movie-content">
+                <!-- Poster and Basic Info -->
+                <div class="movie-basic-info">
+                    <div id="poster-container" class="movie-poster">
+                        <!-- Poster will be injected here -->
+                    </div>
+                    <div class="movie-header">
+                        <h1 id="movie-title"><!-- Title will be injected here --></h1>
+                        <div class="movie-meta">
+                            <span id="release-year"><!-- Year --></span>
+                            <span id="runtime"><!-- Runtime --></span>
+                            <span id="rating"><!-- Rating --></span>
+                        </div>
+                        <div id="genres"><!-- Genres will be injected here --></div>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="action-buttons">
+                    <button id="watch-now-btn" class="primary-button">
+                        <i class="fas fa-play-circle"></i> Assistir Agora
+                    </button>
+                    <button id="watch-trailer-btn" class="secondary-button"> 
+                        <i class="fas fa-play"></i> Assistir Trailer
+                    </button>
+                    <button id="add-favorite-btn" class="secondary-button">
+                        <i class="fas fa-heart"></i> Adicionar aos Favoritos
+                    </button>
+                </div>
+
+                <!-- Overview -->
+                <div class="movie-overview">
+                    <h2>Sinopse</h2>
+                    <p id="overview"><!-- Overview will be injected here --></p>
+                </div>
+
+
+                <!-- NOVO -->
+                <div id="series-data" class="series-section" style="display: none;">
+                    <div class="series-selectors">
+                        <h2>Temporadas</h2>
+                        <select id="season-select" class="season-dropdown">
+                            </select>
+                    </div>
+                    <h3>Episódios</h3>
+                    <div id="episode-list" class="episode-list">
+                        </div>
+                </div>
+                
+                <!-- Trailer Section -->
+                <div id="trailer-container" class="trailer-section" style="display: none;">
+                    <h2>Trailer</h2>
+                    <div class="trailer-wrapper">
+                        <!-- Trailer iframe will be injected here -->
+                    </div>
+                </div>
+
+                <!-- Cast Section -->
+                <div class="cast-section">
+                    <h2>Elenco Principal</h2>
+                    <div id="cast-list" class="cast-list">
+                        <!-- Cast members will be injected here -->
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <h2>CineStream</h2>
+            </div>
+            <div class="footer-links">
+                <h3>Links Rápidos</h3>
+                <ul>
+                    <li><a href="index.html">Início</a></li>
+                    <li><a href="index.html#categories">Categorias</a></li>
+                    <li><a href="index.html#about">Sobre</a></li>
+                    <li><a href="index.html#contact">Contato</a></li>
+                </ul>
+            </div>
+            <div class="footer-social">
+                <h3>Redes Sociais</h3>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+            <div class="footer-contact">
+                <h3>Contato</h3>
+                <p>Email: contato@cinestream.com</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>©️ 2025 CineStream — Projeto acadêmico. Dados fornecidos pela TMDB API.</p>
+        </div>
+    </footer>
+
+    <!-- Script -->
+    <script src="js/details.js"></script>
+
+    <!-- Player Modal -->
+    <div id="player-modal" class="player-modal-container">
+        <div class="player-modal-content">
+            <span class="player-modal-close">&times;</span>
+            <div id="player-iframe-container" class="trailer-wrapper"></div>
+        </div>
+    </div>
+</body>
+</html>

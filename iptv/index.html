@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CineStream - Sua plataforma de streaming</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    
+    <style>
+        .selection-section {
+            padding: 5rem 1rem;
+            text-align: center;
+            background: var(--background-dark);
+        }
+        .selection-container {
+            max-width: 600px;
+            margin: 2rem auto;
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+        }
+        .selection-button {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: var(--background-light);
+            color: var(--text-color);
+            padding: 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+        .selection-button i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+        .selection-button:hover {
+            transform: translateY(-5px) scale(1.02);
+            background: rgba(22, 22, 22, 0.9);
+        }
+        /* Ajuste do Hero para ser menor se necessário, mas manteremos o original por agora */
+    </style>
+
+</head>
+<body>
+    <header class="header">
+        <nav class="navbar">
+            <div class="logo">
+                <h1>CineStream</h1>
+            </div>
+            <nav class="menu">
+                <ul class="menu-list">
+                    <li><a href="favoritos.html">Favoritos</a></li>
+                    <li><button id="logout-btn" class="logout-button"><i class="fas fa-sign-out-alt"></i> Sair</button></li>
+                </ul>
+            </nav>
+            <button class="menu-toggle" aria-label="Menu">
+                <i class="fas fa-bars"></i>
+            </button>
+        </nav>
+    </header>
+
+    <section class="hero" id="home" style="background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80') no-repeat center center; background-size: cover;">
+        <div class="hero-content">
+            <h2>Escolha sua aventura cinematográfica.</h2>
+        </div>
+    </section>
+
+    <section class="selection-section" id="selection">
+        <div class="selection-container">
+            <a href="index_list.html?type=movie" class="selection-button">
+                <i class="fas fa-film"></i>
+                Filmes
+            </a>
+            <a href="index_list.html?type=tv" class="selection-button">
+                <i class="fas fa-tv"></i>
+                Séries
+            </a>
+        </div>
+    </section>
+    
+    <footer class="footer">
+        <div class="footer-bottom">
+            <p>©️ 2025 CineStream — Projeto acadêmico. Dados fornecidos pela TMDB API.</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/auth.js"></script> 
+    </body>
+</html>
